@@ -1,6 +1,7 @@
 package br.com.workshopspring.Workshop_Spring.services;
 
 import br.com.workshopspring.Workshop_Spring.domain.User;
+import br.com.workshopspring.Workshop_Spring.dto.UserDTO;
 import br.com.workshopspring.Workshop_Spring.repository.UserRepository;
 import br.com.workshopspring.Workshop_Spring.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,5 +23,13 @@ public class UserService {
     public User findById(String id) {
         Optional<User> obj = repo.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
+    }
+
+    public User insert(User obj) {
+        return repo.insert(obj);
+    }
+
+    public User fromDTO(UserDTO objDto) {
+        return new User(objDto.getId(), objDto.getName(), objDto.getEmail());
     }
 }
